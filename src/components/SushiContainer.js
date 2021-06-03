@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import MoreButton from "./MoreButton";
+import Sushi from "./Sushi"
 
-function SushiContainer(props) {
+function SushiContainer({sushis,eatSushi}) {
+  const [sushiStart,setSushiStart] = useState(0)
+
+  function handleMoreSushi() {
+    setSushiStart(prevStart => prevStart + 4)
+  }
   return (
     <div className="belt">
-      {/* Render Sushi components here! */}
-      <MoreButton />
+      {sushis.slice(sushiStart,sushiStart + 4).map(sushi => <Sushi key={sushi.id} sushi={sushi} eatSushi={eatSushi}/>)}
+      <MoreButton handleMoreSushi={handleMoreSushi}/>
     </div>
   );
 }
